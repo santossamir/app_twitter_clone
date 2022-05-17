@@ -12,7 +12,7 @@
             $usuario = Container::getModel('Usuario');
         
             $usuario->__set('email', $_POST['email']);
-            $usuario->__set('senha', $_POST['senha']);
+            $usuario->__set('senha', md5($_POST['senha']));
 
             $usuario->validar();
             

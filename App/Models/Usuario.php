@@ -59,5 +59,22 @@
 
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
+
+        public function validar(){
+
+            $query_validar = "select id, nome, email from tb_usuarios where email = :email and senha = :senha";
+            $stmt = $this->db->prepare($query_validar);
+            $stmt->bindValue(':email', $this->__get('email'));
+            $stmt->bindValue(':senha', $this->__get('senha'));
+            $stmt->execute();
+
+            $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+            
+            if($usuario['id'] != '' && $usuario['nome'] != ''){
+                $this->__set('id', $usuario['id']);
+                $this->__set('nome', $usuario['nome']);
+            }
+            return $this;
+        }
     }
 ?>

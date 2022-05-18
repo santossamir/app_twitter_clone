@@ -55,11 +55,12 @@
             $pesquisarPor = isset($_GET['pesquisarPor']) ? $_GET['pesquisarPor'] : '';
 
             $usuarios = [];
-
-            if($pesquisarPor != '') {
+           
+            if($pesquisarPor != '') { //Impede que retorne na pesquisa para seguir usuario o próprio usuário logado.
 
                 $usuario = Container::getModel('Usuario');
                 $usuario->__set('nome', $pesquisarPor);
+                $usuario->__set('id', $_SESSION['id']);
                 $usuarios = $usuario->getAll();
             }
 
